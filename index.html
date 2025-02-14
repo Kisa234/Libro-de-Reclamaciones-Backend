@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro de reclamaciones </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>LIBRO DE RECLAMACIONES</h1>
+        <sub>
+            Conforme a lo establecido en el Código de Protección y Defensa del Consumidor,
+            esta institución cuenta con un Libro de Reclamaciones a su disposición.
+        </sub>
+
+        <div class="info-container form">
+
+            <div class="data">
+                <h2>DATOS DE LA EMPRESA</h2>
+                <p>Razón social: PIOLA BRANDS SAC</p>
+                <p>RUC: 20609022087</p>
+                <p>Dirección: Lopez de Ayala 116, San Borja</p>
+                <p>Mail: gabriel@piolabrands.com</p>
+            </div>
+               
+            <div class="id">
+                <h2>HOJA DE RECLAMACION</h2>
+                <p>N°: 0001</p>
+            </div>
+
+        </div>
+        
+        
+        <div class="form-consumidor form" id="form-consumidor">
+            <h2>IDENTIFICACIÓN DEL CONSUMIDOR O RECLAMANTE</h2>
+            <div class="form-group">
+                
+                <div class="form-input">
+                    <select id="identificacionSelect" class="input-value" name="value[identificacion]"required>
+                        <option value="" disabled selected>TIPO DE DOCUMENTO DE IDENTIDAD</option>
+                        <option value="DNI">DNI</option>
+                        <option value="CE">C.E</option>
+                        <option value="PASAPORTE">PASAPORTE</option>
+                    </select>
+                    <p class="form-campos-error identificacion select">Seleccione el documento de identidad</p>
+                </div>
+                <div class="form-input">
+                    <input id="identificacionInput" class="input-value" type="text" name="value[dni-ce-pasaporte]" placeholder='DNI / C.E / PASAPORTE' required>
+                    <p class="form-campos-error identificacion">El documento de identidad es requerido</p>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                
+                <div class="form-input">
+                    <input class="input-value" type="text" name="value[nombres]" id="nombresInput" placeholder="NOMBRES" required>
+                    <p class="form-campos-error nombre">El nombre ingresado no es válido</p>
+                </div>
+                <div class="form-input">
+                    <input class="input-value" type="text" name="value[apellidos]" id="apellidosInput" placeholder="APELLIDOS" required>        
+                    <p class="form-campos-error apellidos">El apellido ingresado no es válido</p>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <div class="form-input">
+                    <select id="departamentoSelect" class="input-value" name="value[departamento]"required>
+                        <option value="" disabled selected>DEPARTAMENTO</option>
+                    </select>
+                    <p class="form-campos-error departamento">El departamento es requerido</p>
+                </div>
+                <div class="form-input">
+                    <select id="provinciaSelect" class="input-value" name="value[provincia]"required>
+                        <option value="" disabled selected>PROVINCIA</option>
+                    </select>
+                    <p class="form-campos-error provincia">La provincia es requerido</p>
+                </div>
+                <div class="form-input">
+                    <select id="distritoSelect" class="input-value" name="value[distrito]"required>
+                        <option value="" disabled selected>DISTRITO</option>
+                    </select>
+                    <p class="form-campos-error distrito">El distrito es requerido</p>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <div class="form-input">
+                    <input class="input-value" type="text" name="value[direcion]" id="addressInput" placeholder="DIRECION COMPLETA (INCLUIR DPTO/CASA)" required>        
+                    <p class="form-campos-error direccion">La dirección ingresada no es válido</p>
+                </div>
+                <div class="form-input">
+                    <input class="input-value"type="text" name="value[celular]" id="celularInput" placeholder="TELEFONO CELULAR" required>        
+                    <p class="form-campos-error celular">El celular ingresado no es válido</p>
+                </div>
+                <div class="form-input">
+                    
+                    <input  type="email" name="value[email]" placeholder="CORREO ELECTRONICO"class="input-value"id="emailInput" required>
+                    <p class="form-campos-error email">El email ingresado no es válido</p>
+                </div>
+
+            </div>
+                
+            <div class="form-input-checkbox">
+                <input type="checkbox" id="form-menor-checkbox" >
+                <label>Eres menor de edad?</label>
+            </div>
+            <div class="container-menor " id="form-menor">
+                <div class="form-group">
+
+                    <div class="form-input">
+                        <input class="input-value" type="text" name="value[nombres]" id="nombresPadresInput" placeholder="NOMBRE COMPLETO DEL PADRE" >
+                        <p class="form-campos-error nombre padres">El nombre ingresado no es válido</p>
+                    </div>
+                    <div class="form-input">
+                        <input class="input-value" type="text" name="value[direcion]" id="addressPadresInput" placeholder="DIRECION COMPLETA (INCLUIR DPTO/CASA)" >        
+                        <p class="form-campos-error direccion padres">La dirección ingresada no es válido</p>
+                    </div>
+
+                </div>
+                <div class="form-group">
+
+                    <div class="form-input">
+                        <input class="input-value"type="text" name="value[celular]" id="celularPadresInput" placeholder="TELEFONO CELULAR" >        
+                        <p class="form-campos-error celular padres">El celular ingresado no es válido</p>
+                    </div>
+                    <div class="form-input">
+                        <input  type="email" name="value[email]" placeholder="CORREO ELECTRONICO"class="input-value"id="emailPadresInput" >
+                        <p class="form-campos-error email padres">El email ingresado no es válido</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="form-input-checkbox">
+                <input type="checkbox" id="producto-entregado-checkbox" >
+                <label>Tu producto fue entregado</label>
+            </div>
+            <div class="container-producto-entregado " id="producto-entregado-form">
+                <div class="form-group">
+
+                    <div class="form-input">
+                        <input class="input-value" type="text" name="value[#boleta]" id="boletaInput" placeholder="N° de boleta " >        
+                        <p class="form-campos-error boleta">El numero de boleta no es valido</p>
+                    </div>
+                    <div class="form-input">
+                        <input class="input-value" type="date" name="value[fecha]" id="fechaBoletaInput" placeholder="FECHA DE COMPRA" >        
+                        <p class="form-campos-error fecha boleta">La fecha ingresada no es válida</p>
+                    </div>
+                </div>
+                    
+            </div>
+        </div>
+
+        
+        <div class="form-pedido form">
+            <h2>IDENTIFICACIÓN DEL BIEN CONTRATADO</h2>
+            <div class="form-group">
+
+                <div class="form-input">
+                    <input class="input-value" type="text" name="value[#pedido]" id="pedidoInput" placeholder="N° PEDIDO " required>        
+                    <p class="form-campos-error pedido">El numero de pedido no es valido</p>
+                </div>
+                
+                <div class="form-input">
+                    <select id="bienSelect" class="input-value" name="value[BIEN]"required>
+                        <option value="" disabled selected>TIPO DE BIEN</option>
+                        <option value="servicio">SERVICIO</option>
+                        <option value="bien">BIEN</option>
+                    </select>
+                    <p class="form-campos-error bien select">Seleccion un tipo de bien</p>
+                </div>
+                
+                <div class="form-input">
+                    <input id="montoInput" class="input-value" type="text" name="value[monto]" placeholder='MONTO RECLAMADO' required>
+                    <p class="form-campos-error monto">El monto ingresado no es valido</p>
+                </div>
+                
+            </div>
+                
+        </div>
+
+
+        
+        <div class="form-reclamo form">
+            <h2>DETALLE DE SU RECLAMO</h2>
+            
+            <div class="form-group">    
+                <div class="form-input">
+                    <select id="reclamoSelect" class="input-value" name="value[reclamo]"required>
+                        <option value="" disabled selected>TIPO DE RECLAMO</option>
+                        <option value="reclamo">RECLAMO</option>
+                        <option value="queja">QUEJA</option>
+                    </select>
+                    <p class="form-campos-error reclamo select">Seleccion un tipo de reclamo</p>
+                </div>
+                
+                <div class="form-input">
+                    <input class="input-value" type="date" name="value[fecha]" id="fechaReclamoInput" disabled required>        
+                    <p class="form-campos-error fecha reclamo">La fecha ingresada no es válida</p>
+                </div>
+            </div>
+            
+            <div class="form-group">
+
+                <div class="form-input">
+                    <textarea class="input-value" name="value[reclamo]" id="reclamoInput" placeholder="DETALLE DEL RECLAMO" required></textarea>
+                    <p class="form-campos-error reclamo">Es necersario escribir el detelle del reclamo</p>
+                </div>
+                
+                <div class="form-input">
+                    <textarea class="input-value" name="value[pedido]" id="pedidoInputReclamo" placeholder="PEDIDO" required></textarea>
+                    <p class="form-campos-error pedido reclamo">Es necersario escribir el pedido</p>
+                </div>
+            </div>
+                
+            <div class="form-input-checkbox politics-checkbox">
+                <input type="checkbox" id="politics" required>
+                <label>
+                    Declaro haber leído y acepto la Política de Privacidad. Declaro que los datos consignados son correctos y fiel expresión de la verdad.
+                </label>
+            </div>
+
+            <p>
+                * La respuesta a este reclamo o queja será enviada al mail indicado en este formulario
+            </p> 
+
+                * La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo 
+                para interponer una denuncia ante el INDECOPI. 
+            <p>    
+                * El proveedor deberá dar respuesta al reclamo en un plazo no mayor a quince (15) días calendario,
+                pudiendo ampliar el plazo hasta por treinta (30) días más, previa comunicación al consumidor. 
+            </p> 
+                * Reclamo: Manifestación mediante el cual un consumidor expresa una disconformidad relacionada a los bienes o servicios
+                suministrados. La reclamación no constituye una denuncia y en consecuencia, no inicia un procedimiento administrativo 
+                sancionador por infracción a la normativa de protección al consumidor. 
+            <p>
+                * Queja: Manifestación que un consumidor realiza para expresar el malestar o descontento por la atención 
+                al público, sin que tenga por finalidad la obtención de un procedimiento por parte del proveedor. 
+                La queja tampoco constituye una denuncia y tampoco inicia el procedimiento administrativo por infracción 
+                 la normativa de protección al consumidor. 
+                
+            </p>
+
+
+        </div>
+
+
+        <div class="form-input-button">
+            <button id="subtmitButton">FINALIZAR PEDIDO</button>
+        </div>
+
+    </div>
+    <script src="index.js"></script>
+    <script src="validation.js"></script>
+</body>
+</html>
