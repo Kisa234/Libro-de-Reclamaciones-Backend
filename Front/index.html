@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-input">
                     <input id="identificacionInput" class="input-value" type="text" name="value[dni-ce-pasaporte]" placeholder='DNI / C.E / PASAPORTE' required>
-                    <p class="form-campos-error identificacion">El documento de identidad es requerido</p>
+                    <p class="form-campos-error identificacion input">El documento de identidad es requerido</p>
                 </div>
 
             </div>
@@ -162,11 +162,6 @@
         <div class="form-pedido form">
             <h2>IDENTIFICACIÓN DEL BIEN CONTRATADO</h2>
             <div class="form-group">
-
-                <div class="form-input">
-                    <input class="input-value" type="text" name="value[#pedido]" id="pedidoInput" placeholder="N° PEDIDO " required>        
-                    <p class="form-campos-error pedido">El numero de pedido no es valido</p>
-                </div>
                 
                 <div class="form-input">
                     <select id="bienSelect" class="input-value" name="value[BIEN]"required>
@@ -182,6 +177,16 @@
                     <p class="form-campos-error monto">El monto ingresado no es valido</p>
                 </div>
                 
+            </div>
+            <div class="form-group">
+                <div class="form-input">
+                    <input class="input-value" type="text" name="value[#pedido]" id="pedidoInput" placeholder="N° PEDIDO " required>        
+                    <p class="form-campos-error pedido">El numero de pedido no es valido</p>
+                </div>
+                <div class="form-input">
+                    <input class="input-value" type="text" name="vaue[producto]" id="productoInput" placeholder="PRODUCTO ADQUIRIDO" required>   
+                    <p class="form-campos-error producto">El nombre de producto no es valido</p> 
+                </div>
             </div>
                 
         </div>
@@ -211,7 +216,7 @@
 
                 <div class="form-input">
                     <textarea class="input-value" name="value[reclamo]" id="reclamoInput" placeholder="DETALLE DEL RECLAMO" required></textarea>
-                    <p class="form-campos-error reclamo">Es necersario escribir el detelle del reclamo</p>
+                    <p class="form-campos-error reclamo input">Es necersario escribir el detelle del reclamo</p>
                 </div>
                 
                 <div class="form-input">
@@ -259,5 +264,6 @@
     </div>
     <script src="index.js"></script>
     <script src="validation.js"></script>
+    <script src="restricciones.js"></script>
 </body>
 </html>

@@ -1,76 +1,66 @@
 document.addEventListener("DOMContentLoaded", function () {
     // VALIDADORES
 
-    const regex_email = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    const regex_email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const regex_number = /^[0-9]+$/;
-    const regex_letters = /^[a-zA-Z\s]+$/;
-    const regex_alphanumeric = /^[a-zA-Z0-9\s]+$/;
+    const regex_letters = /^[A-Za-z]+$/;
+    const regex_alphanumeric = /^[A-Za-z0-9\s]+$/;
+    const regex_document = /^(10|20|15|17)\d{8}$|^\d{8}$|^\d{9,12}$/;
+    const regex_fecha = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/;
+    const celularPeruRegex = /^9\d{8}$/;
+
+    const validation = (input, regex, errorText) =>{
+        if(input.value.trim() === "" || input.value === "0" || input.value === null){
+            errorText.style.visibility = "visible";
+            {console.log(`Error en ${input.id} vacio`)}
+            return false;
+        }
+        else if(!regex.test(input.value)){
+            errorText.style.visibility = "visible";
+            {console.log(`Error en ${input.id}`)}
+            return false;
+        }
+        errorText.style.visibility = "hidden";
+        return true;
+    }
     
-    const delayValidation = (callback, delay = 1000) => {
-        let timer;
-        return (...args) => {
-            clearTimeout(timer);
-            timer = setTimeout(() => callback(...args), delay);
-        };
+    const validarTextos = (input, error) => {
+        return validation(input, regex_letters, error);
     };
     
-    const validarTextos = delayValidation((texto, error) => {
-        if (!texto.value.trim()) {
-            error.style.display = "block";
-            return false;
-        }
-        if (!regex_letters.test(texto.value)) {
-            error.style.display = "block";
-            return false;
-        }
-        error.style.display = "none";
-        return true;
-    });
+    const validarNumeros = (input, error) => {
+        return validation(input, regex_number, error);
+    };
     
-    const validarNumeros = delayValidation((numero, error) => {
-        if (!numero.value.trim()) {
-            error.style.display = "block";
+    const validarSelect = (select, error) => {
+        if(select.selectedIndex === 0){
+            error.style.visibility = "visible";
             return false;
         }
-        if (!regex_number.test(numero.value)) {
-            error.style.display = "block";
-            return false;
-        }
-        error.style.display = "none";
         return true;
-    });
+    };
     
-    const validarSelect = delayValidation((select, error) => {
-        if (!select.value.trim()) {
-            error.style.display = "block";
-            return false;
-        }
-        error.style.display = "none";
-        return true;
-    });
-    
-    const validarEmail = (email, error) =>{
-        if(!regex_email.test(email.value)){
-            error.style.display = "block";
-            return false;
-        }
-        error.style.display = "none";
-        return true;
-    }
-    
-    const agregarRestricciones = (input, regex) =>{
-        input.addEventListener("keydown", (e) => {
-            if (!regex.test(e.key) && e.key !== "Backspace" && e.key !== "Delete") {
-                e.preventDefault();
-            }
-        });
+    const validarEmail = (input, error) =>{
+        return validation(input, regex_email, error);
+    };
+
+    const validarDocumento = (input, error) => {
+        return validation (input, regex_document, error);
     }
 
+    const validarCelular = (input, error) => {
+        return validation(input, celularPeruRegex, error);
+    }
 
- 
+    const validarFecha = (input, error) => {
+        return validation(input, regex_fecha, error);
+    }
+
+    const validarAlfanumerico = (input, error) => {
+        return validation(input, regex_alphanumeric, error);
+    }
     
-
-    // RESTRICCIONES!!!!!
+    
 
 
     // 1er formulario
@@ -86,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const emailInput = document.getElementById("emailInput");
 
     const identificacionSelectEror = document.querySelector(".form-campos-error.identificacion.select");
-    const identificacionEror = document.querySelector(".form-campos-error.identificacion");
+    const identificacionEror = document.querySelector(".form-campos-error.identificacion.input");
     const nombreError = document.querySelector(".form-campos-error.nombre");
     const apellidoError = document.querySelector(".form-campos-error.apellidos");
     const departamentoError = document.querySelector(".form-campos-error.departamento");
@@ -96,12 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const celularError = document.querySelector(".form-campos-error.celular");
     const emailError = document.querySelector(".form-campos-error.email");
 
-    agregarRestricciones(identificacionInput, regex_number);
-    agregarRestricciones(nombresInput, regex_letters);
-    agregarRestricciones(apellidosInput, regex_letters);
-    agregarRestricciones(addressInput, regex_alphanumeric);
-    agregarRestricciones(celularInput, regex_number);   
-
+    
     // 1er formulario opcional
     const menorCheckbox = document.getElementById("form-menor-checkbox");
     const nombresPadresInput = document.getElementById("nombresPadresInput");
@@ -109,15 +94,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const celularPadresInput = document.getElementById("celularPadresInput");
     const emailPadresInput   = document.getElementById("emailPadresInput");
 
-    const nombresPadresError = document.querySelector(".form-campos-error.nombres.padres");
+    const nombresPadresError = document.querySelector(".form-campos-error.nombre.padres");
     const direccionPadresError = document.querySelector(".form-campos-error.direccion.padres");
     const celularPadresError = document.querySelector(".form-campos-error.celular.padres"); 
     const emailPadresError = document.querySelector(".form-campos-error.email.padres");
 
-    agregarRestricciones(nombresPadresInput, regex_letters);
-    agregarRestricciones(addressPadresInput, regex_alphanumeric);
-    agregarRestricciones(celularPadresInput, regex_number);
-
+  
 
 
 
@@ -130,126 +112,120 @@ document.addEventListener("DOMContentLoaded", function () {
     const fechaBoletaError = document.querySelector(".form-campos-error.fecha.boleta");
 
    
-    agregarRestricciones(boletaInput, regex_number);
-    agregarRestricciones(fechaBoletaInput, regex_letters);
-
-
+    
 
     // 2do formulario
     const pedidoInput = document.getElementById("pedidoInput");
     const bienSelect = document.getElementById("bienSelect");
     const montoInput = document.getElementById("montoInput");
+    const productoInput = document.getElementById("productoInput");
 
     const bienSelectError = document.querySelector(".form-campos-error.bien.select");
     const pedidoError = document.querySelector(".form-campos-error.pedido");
     const montoError = document.querySelector(".form-campos-error.monto");
+    const productoError = document.querySelector(".form-campos-error.producto");
 
-    agregarRestricciones(pedidoInput, regex_number);
-    agregarRestricciones(montoInput, regex_number);
 
 
     // 3er formulario
     const reclamoSelect = document.getElementById("reclamoSelect");
-    const fechaReclamoInput = document.getElementById("fechaReclamoInput");
     const reclamoInput = document.getElementById("reclamoInput");
     const pedidoInputReclamo = document.getElementById("pedidoInputReclamo");     
 
 
     const reclamoSelectError = document.querySelector(".form-campos-error.reclamo.select");
-    const fechaReclamoError = document.querySelector(".form-campos-error.fecha.reclamo");
-    const reclamoError = document.querySelector(".form-campos-error.reclamo");
+    const reclamoError = document.querySelector(".form-campos-error.reclamo.input");
     const pedidoReclamoError = document.querySelector(".form-campos-error.pedido.reclamo");
 
-    agregarRestricciones(reclamoInput, regex_alphanumeric);
-    agregarRestricciones(pedidoInputReclamo, regex_alphanumeric);
-
+   
 
 
     const politicsCheckbox = document.getElementById("politics");
     
 
     // VALIDAR FORMUARIO 
-
+    let validacion = true;
     const validarFormulario = (e) => {
         e.preventDefault();
-        let validacion = true;
+        
+        validacion = true;
 
         // Validar 1er formulario
         if(!validarSelect(identificacionSelect, identificacionSelectEror)){
             validacion = false;
         }
-
-        if(!validarNumeros(identificacionInput, identificacionEror)){
+        
+        if(!validarDocumento(identificacionInput, identificacionEror)){
             validacion = false;
         }
-
+        
         if(!validarTextos(nombresInput, nombreError)){
             validacion = false;
         }
-
+        
         if(!validarTextos(apellidosInput, apellidoError)){
             validacion = false;
         }
-
+        
         if(!validarSelect(departamentoSelect, departamentoError)){
             validacion = false;
         }
-
+        
         if(!validarSelect(provinciaSelect, provinciaError)){
             validacion = false;
         }
-
+        
         if(!validarSelect(distritoSelect, distritoError)){
             validacion = false;
         }
-
-        if(!validarTextos(addressInput, direccionError)){
+        
+        if(!validarAlfanumerico(addressInput, direccionError)){
             validacion = false;
         }
-
-        if(!validarNumeros(celularInput, celularError)){
+        
+        if(!validarCelular(celularInput, celularError)){
             validacion = false;
         }
-
+        
         if(!validarEmail(emailInput, emailError)){
             validacion = false;
         }
-
+        
         // Validar 1er formulario opcional
         if(menorCheckbox.checked){
             if(!validarTextos(nombresPadresInput, nombresPadresError)){
                 validacion = false;
             }
-
-            if(!validarTextos(addressPadresInput, direccionPadresError)){
+            
+            if(!validarAlfanumerico(addressPadresInput, direccionPadresError)){
                 validacion = false;
             }
-
-            if(!validarNumeros(celularPadresInput, celularPadresError)){
+            
+            if(!validarCelular(celularPadresInput, celularPadresError)){
                 validacion = false;
             }
-
+            
             if(!validarEmail(emailPadresInput, emailPadresError)){
                 validacion = false;
             }
         }
-
+        
         // Validar 2do formulario opcional 
         if(productoCheckbox.checked){
-            if(!validarNumeros(boletaInput, boletaError)){
+            if(!validarAlfanumerico(boletaInput, boletaError)){
                 validacion = false;
             }
-
-            if(!validarTextos(fechaBoletaInput, fechaBoletaError)){
+            
+            if(!validarFecha(fechaBoletaInput, fechaBoletaError)){
                 validacion = false;
             }
         }
-
-       
-
+        
+        
+        
         // Validar 2do formulario
-
-        if(!validarTextos(pedidoInput, pedidoError)){
+        
+        if(!validarAlfanumerico(pedidoInput, pedidoError)){
             validacion = false;
         }
         if(!validarSelect(bienSelect, bienSelectError)){
@@ -258,27 +234,77 @@ document.addEventListener("DOMContentLoaded", function () {
         if(!validarNumeros(montoInput, montoError)){
             validacion = false;
         }
-
+        if(!validarAlfanumerico(productoInput, productoError)){
+            validacion = false;
+        }
+        
         // Validar 3er formulario
-
+        
         if(!validarSelect(reclamoSelect, reclamoSelectError)){
             validacion = false;
         }
-        if(!validarTextos(reclamoInput, reclamoError)){
+        if(!validarAlfanumerico(reclamoInput, reclamoError)){
             validacion = false;
         }
-        if(!validarTextos(pedidoInputReclamo, pedidoReclamoError)){
+        if(!validarAlfanumerico(pedidoInputReclamo, pedidoReclamoError)){
             validacion = false;
         }
         if (!politicsCheckbox.checked) {
             alert("Debe aceptar las políticas de privacidad");
             validacion = false;
         }
+        
+        if (validacion) {
+            console.log("Formulario enviado correctamente");
+        }else{
+            console.log("Formulario con errores");
+        }
 
+        
+        
+        if (validacion){
+            const menorValue = menorCheckbox.checked;
+            const productoEntregadoValue = productoCheckbox.checked;
 
-
+            console.log(
+                "LA INFORMACIÓN DEL FORMULARIO ES CORRECTA",
+                {
+                    "TipoDocumento": identificacionSelect.value,
+                    "NumeroDocumento": identificacionInput.value,
+                    "Nombres": nombresInput.value,
+                    "Apellidos": apellidosInput.value,
+                    "Departamento": departamentoSelect.value,
+                    "Provincia": provinciaSelect.value,
+                    "Distrito": distritoSelect.value,
+                    "Direccion": addressInput.value,
+                    "Telefono": celularInput.value, 
+                    "Correo": emailInput.value,
+                    "EsMenorEdad": menorValue,
+                    "NombrePadre": nombresInput.value,
+                    "DireccionPadre": addressPadresInput.value,
+                    "TelefonoPadre": celularPadresInput.value,
+                    "CorreoPadre": emailPadresInput.value,
+                    "EsProductoEntregado": productoEntregadoValue,
+                    "NumeroBoleta": boletaInput.value,
+                    "FechaCompra": fechaBoletaInput.value,
+                    "TipoBien":           bienSelect.value,
+                    "MontoReclamado"      :montoInput.value,
+                    "NroPedido"           :pedidoInput.value,
+                    "ProductoAdquirido"   :productoInput.value,
+                    "TipoReclamo": reclamoSelect.value,
+                    "FechaReclamo": Date.now(),
+                    "DetalleReclamo": pedidoInputReclamo.value,
+                    "PedidoReclamo": pedidoInputReclamo.value
+                }
+            )
+        }
+        
     }
 
+    
 
+    const button = document.getElementById("subtmitButton");
+    button.addEventListener("click", validarFormulario);
+    
 });
 
