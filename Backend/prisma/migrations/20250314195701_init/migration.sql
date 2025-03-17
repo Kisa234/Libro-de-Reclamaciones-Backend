@@ -1,0 +1,33 @@
+-- CreateTable
+CREATE TABLE "Reclamacion" (
+    "id" SERIAL NOT NULL,
+    "TipoDocumento" TEXT NOT NULL,
+    "NumeroDocumento" TEXT NOT NULL,
+    "Nombres" TEXT NOT NULL,
+    "Apellidos" TEXT NOT NULL,
+    "Departamento" TEXT NOT NULL,
+    "Provincia" TEXT NOT NULL,
+    "Distrito" TEXT NOT NULL,
+    "Direccion" TEXT NOT NULL,
+    "Telefono" TEXT NOT NULL,
+    "Correo" TEXT NOT NULL,
+    "EsMenorEdad" BOOLEAN NOT NULL,
+    "NombrePadre" TEXT NOT NULL,
+    "DireccionPadre" TEXT NOT NULL,
+    "TelefonoPadre" TEXT NOT NULL,
+    "CorreoPadre" TEXT NOT NULL,
+    "EsProductoEntregado" BOOLEAN NOT NULL,
+    "NumeroBoleta" TEXT NOT NULL,
+    "FechaCompra" TEXT NOT NULL,
+    "TipoBien" TEXT NOT NULL,
+    "MontoReclamado" TEXT NOT NULL,
+    "NroPedido" TEXT NOT NULL,
+    "ProductoAdquirido" TEXT NOT NULL,
+    "TipoReclamo" TEXT NOT NULL,
+    "FechaReclamo" TIMESTAMP(3) NOT NULL,
+    "DetalleReclamo" TEXT NOT NULL,
+    "PedidoReclamo" TEXT NOT NULL,
+    "FechaRespuesta" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Reclamacion_pkey" PRIMARY KEY ("id")
+);

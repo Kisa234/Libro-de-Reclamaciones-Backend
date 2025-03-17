@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Reclamacion {
+  id                  Int      @id @default(autoincrement())
+  //IDENTIFICACIÓN DEL CONSUMIDOR RECLAMANTE
+  TipoDocumento       String
+  NumeroDocumento     String
+  Nombres             String
+  Apellidos           String
+  Departamento        String
+  Provincia           String
+  Distrito            String
+  Direccion           String
+  Telefono            String
+  Correo              String
+
+  //Datos del Apoderado (si reclamante es menor de edad)
+  EsMenorEdad         Boolean
+  NombrePadre         String
+  DireccionPadre      String
+  TelefonoPadre       String
+  CorreoPadre         String
+
+  //IDENTIFICACIÓN DEL CONSUMIDOR RECLAMANTE
+  EsProductoEntregado Boolean
+  NumeroBoleta        String
+  FechaCompra         String
+  TipoBien            String
+  MontoReclamado      String
+  NroPedido           String
+  ProductoAdquirido   String
+
+  //DETALLE DE LA RECLAMACIÓN Y PEDIDO DEL CONSUMIDOR
+  TipoReclamo         String
+  FechaReclamo        DateTime
+  DetalleReclamo      String
+  PedidoReclamo       String
+  FechaRespuesta      DateTime
+}
