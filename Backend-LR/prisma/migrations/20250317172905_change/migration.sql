@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Reclamacion" ALTER COLUMN "FechaReclamo" SET DEFAULT CURRENT_TIMESTAMP;
