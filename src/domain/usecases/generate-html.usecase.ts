@@ -60,7 +60,9 @@ export class generateReclamoHTML implements GenerateReclamoHTMLUseCase {
 
         const pdfPath = path.join(outputDir, `reclamo_${Date.now()}.pdf`); // Nombre único
 
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+          });          
         const page = await browser.newPage();
 
         await page.setContent(html, { waitUntil: 'load' });
