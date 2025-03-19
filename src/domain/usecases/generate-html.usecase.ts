@@ -16,7 +16,7 @@ export class generateReclamoHTML implements GenerateReclamoHTMLUseCase {
     
 
     execute(reclamoEntity: ReclamacionEntity): string {
-        const filePath = path.join(__dirname, '../../public/reclamo.html');
+        const filePath = path.join(__dirname, '../../../index.html');
         let html = fs.readFileSync(filePath, 'utf8');
     
         // Convertir entidad a JSON (formatear fechas como ISO string)
