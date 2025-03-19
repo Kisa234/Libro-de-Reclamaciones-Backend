@@ -89,6 +89,23 @@ export class CreateReclamacionDto{
         if(!DetalleReclamo) return ['DetalleReclamo is required', undefined];
         if(!PedidoReclamo) return ['PedidoReclamo is required', undefined];
 
+        Nombres.toUpperCase();
+        Apellidos.toUpperCase();
+        Departamento.toUpperCase();
+        Provincia.toUpperCase();
+        Distrito.toUpperCase();
+        Direccion.toUpperCase();
+        Correo.toUpperCase();
+        ProductoAdquirido.toUpperCase();
+        DetalleReclamo.toUpperCase();
+        PedidoReclamo.toUpperCase();
+
+        if(EsMenorEdad === 'true'){
+            NombrePadre.toUpperCase();
+            DireccionPadre.toUpperCase();
+            CorreoPadre.toUpperCase();
+        }
+
         const FechaRespuesta = new Date();
         FechaRespuesta.setDate(FechaRespuesta.getDate() + 15);
         
