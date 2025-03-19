@@ -52,7 +52,7 @@
                             font-size: 10.5pt;
                             font-family: 'Arial', sans-serif;
                           ">
-                        Tienda Origen del Reclamo
+                        TIENDA ORIGEN DEL RECLAMO
                       </span>
                       <span style="font-size: 10.5pt"></span>
                     </p>
@@ -74,7 +74,7 @@
                       <span style="
                             font-size: 10.5pt;
                             font-family: 'Arial', sans-serif;
-                          ">Nro. de Reclamo</span><span style="font-size: 10.5pt"></span>
+                            ">NRO. DE RECLAMO</span><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
                   <td style="padding: 3pt 3pt 3pt 3pt">
@@ -109,7 +109,7 @@
                       <span style="
                             font-size: 10.5pt;
                             font-family: 'Arial', sans-serif;
-                          ">Nro. Caso</span><span style="font-size: 10.5pt"></span>
+                          ">NRO. CASO</span><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
                   <td colspan="2" style="padding: 3pt 3pt 3pt 3pt">
@@ -214,7 +214,7 @@
                       <span style="
                             font-size: 10.5pt;
                             font-family: 'Arial', sans-serif;
-                          ">DPTO.</span><span style="font-size: 10.5pt"></span>
+                          ">DEPARTAMENTO:</span><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
                   <td colspan="2" style="padding: 3pt 3pt 3pt 3pt" id="Departamento"></td>
@@ -223,7 +223,7 @@
                       <span style="
                             font-size: 10.5pt;
                             font-family: 'Arial', sans-serif;
-                          ">PROV:</span><span style="font-size: 10.5pt"></span>
+                          ">PROVINCIA:</span><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
                   <td style="padding: 3pt 3pt 3pt 3pt" id="Provincia"></td>
@@ -693,7 +693,7 @@
       const reclamo = JSON.parse(dataScript.textContent);
   
       document.getElementById('nroReclamo').innerText = reclamo.id;
-      document.getElementById('fechaReclamo').innerText = new Date(reclamo.FechaReclamo).toDateString('ES');
+      document.getElementById('fechaReclamo').innerText = new Date(reclamo.FechaReclamo).toLocaleDateString('es-ES');;
       document.getElementById('nroCaso').innerText = reclamo.nroReclamacion;
       document.getElementById('nombreReclamante').innerText = reclamo.Nombres + ' ' + reclamo.Apellidos;
       document.getElementById('domicilioReclamante').innerText = reclamo.Direccion;
@@ -715,7 +715,7 @@
       document.getElementById('descripcionReclamado').innerText = reclamo.ProductoAdquirido;
       document.getElementById('detalleReclamo').innerText = reclamo.DetalleReclamo;
       document.getElementById('pedidoReclamo').innerText = reclamo.PedidoReclamo;
-      document.getElementById('fechaRespuesta').innerText = new Date(reclamo.FechaRespuesta).toDateString();
+      document.getElementById('fechaRespuesta').innerText = new Date(reclamo.FechaRespuesta).toLocaleDateString('es-ES');
   
       if(reclamo.TipoBien === 'Producto'){
           document.getElementById('productoCheckbox').innerText = 'X';
