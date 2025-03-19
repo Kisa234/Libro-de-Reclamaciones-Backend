@@ -49,7 +49,7 @@ export class CreateReclamacionDto{
     
 
     static create(props: { [key: string]: any }): [string?, CreateReclamacionDto?]{
-        const {
+        let {
             TipoDocumento, NumeroDocumento, Nombres, Apellidos,
             Departamento, Provincia, Distrito, Direccion, Telefono,
             Correo, EsMenorEdad, NombrePadre, DireccionPadre, TelefonoPadre,
@@ -89,21 +89,21 @@ export class CreateReclamacionDto{
         if(!DetalleReclamo) return ['DetalleReclamo is required', undefined];
         if(!PedidoReclamo) return ['PedidoReclamo is required', undefined];
 
-        Nombres.toUpperCase();
-        Apellidos.toUpperCase();
-        Departamento.toUpperCase();
-        Provincia.toUpperCase();
-        Distrito.toUpperCase();
-        Direccion.toUpperCase();
-        Correo.toUpperCase();
-        ProductoAdquirido.toUpperCase();
-        DetalleReclamo.toUpperCase();
-        PedidoReclamo.toUpperCase();
+        Nombres = Nombres.toUpperCase();
+        Apellidos = Apellidos.toUpperCase();
+        Departamento = Departamento.toUpperCase();
+        Provincia = Provincia.toUpperCase();
+        Distrito = Distrito.toUpperCase();
+        Direccion = Direccion.toUpperCase();
+        Correo = Correo.toUpperCase();
+        ProductoAdquirido = ProductoAdquirido.toUpperCase();
+        DetalleReclamo = DetalleReclamo.toUpperCase();
+        PedidoReclamo = PedidoReclamo.toUpperCase();
 
         if(EsMenorEdad === 'true'){
-            NombrePadre.toUpperCase();
-            DireccionPadre.toUpperCase();
-            CorreoPadre.toUpperCase();
+            NombrePadre = NombrePadre.toUpperCase();
+            DireccionPadre = DireccionPadre.toUpperCase();
+            CorreoPadre = CorreoPadre.toUpperCase();
         }
 
         const FechaRespuesta = new Date();
