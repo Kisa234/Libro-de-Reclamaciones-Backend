@@ -717,16 +717,16 @@
       document.getElementById('pedidoReclamo').innerText = reclamo.PedidoReclamo;
       document.getElementById('fechaRespuesta').innerText = new Date(reclamo.FechaRespuesta).toLocaleDateString('es-ES');
   
-      if(reclamo.TipoBien === 'PRODUCTO'){
-          document.getElementById('productoCheckbox').innerText = 'X';
+      if(reclamo.TipoBien === 'BIEN'){
+          document.getElementById('productoCheckbox').innerText = ' X ';
       } else {
-          document.getElementById('servicioCheckbox').innerText = 'X';
+          document.getElementById('servicioCheckbox').innerText = ' X ';
       }
   
-      if(reclamo.TipoReclamo === 'QUEJA'){
-          document.getElementById('quejaCheckbox').innerText = 'X';
+      if(reclamo.TipoReclamo === 'RECLAMO'){
+        document.getElementById('reclamoCheckbox').innerText = ' X ';
       } else {
-          document.getElementById('reclamoCheckbox').innerText = 'X';
+        document.getElementById('quejaCheckbox').innerText = ' X ';
       }
   });
   </script>

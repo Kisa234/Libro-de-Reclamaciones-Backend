@@ -100,6 +100,7 @@ export class CreateReclamacionDto{
         DetalleReclamo = DetalleReclamo.toUpperCase();
         PedidoReclamo = PedidoReclamo.toUpperCase();
         TipoBien = TipoBien.toUpperCase();
+        TipoReclamo = TipoReclamo.toUpperCase();
 
         if(EsMenorEdad === 'true'){
             NombrePadre = NombrePadre.toUpperCase();
