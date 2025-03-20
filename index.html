@@ -416,10 +416,10 @@
                   </td>
                   <td colspan="2" style="padding: 3pt 3pt 3pt 3pt">
                     <p>
-                      <i><span style="
+                      <i><span id="productoCheckbox" style="
                               font-size: 10.5pt;
                               font-family: 'Arial', sans-serif;
-                            " id="productoCheckbox"></span></i><span style="font-size: 10.5pt"></span>
+                            " ></span></i><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
                   <td style="padding: 3pt 3pt 3pt 3pt">
@@ -445,7 +445,14 @@
                           ">SERVICIO</span><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
-                  <td colspan="2" style="padding: 3pt 3pt 3pt 3pt" id="servcioCheckbox"></td>
+                  <td colspan="2" style="padding: 3pt 3pt 3pt 3pt" >
+                    <span 
+                      id="servicioCheckbox"
+                      style="
+                      font-size: 10.5pt;
+                      font-family: 'Arial', sans-serif;" >
+                    </span>
+                  </td>
                   <td style="padding: 3pt 3pt 3pt 3pt">
                     <p>
                       <span style="
@@ -493,10 +500,10 @@
                   </td>
                   <td style="padding: 3pt 3pt 3pt 3pt">
                     <p>
-                      <i><span style="
+                      <i><span  id="reclamoCheckbox" style="
                               font-size: 10.5pt;
                               font-family: 'Arial', sans-serif;
-                            " id="reclamoCheckbox"></span></i><span style="font-size: 10.5pt"></span>
+                            "></span></i><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
 
@@ -510,7 +517,16 @@
                           ">QUEJA</span><span style="font-size: 10.5pt"></span>
                     </p>
                   </td>
-                  <td id="quejaCheckbox" style="padding: 3pt 3pt 3pt 3pt"></td>
+                  <td  style="padding: 3pt 3pt 3pt 3pt">
+                    <span
+                    id="quejaCheckbox"
+                    style="
+                    font-size: 10.5pt;
+                    font-family: 'Arial', sans-serif;">
+                      
+
+                    </span>
+                  </td>
 
                 </tr>
                 <tr style="height: 11.5pt">
@@ -717,13 +733,13 @@
       document.getElementById('pedidoReclamo').innerText = reclamo.PedidoReclamo;
       document.getElementById('fechaRespuesta').innerText = new Date(reclamo.FechaRespuesta).toLocaleDateString('es-ES');
   
-      if(reclamo.TipoBien === 'BIEN'){
+      if(reclamo.TipoBien == 'BIEN'){
           document.getElementById('productoCheckbox').innerText = ' X ';
       } else {
           document.getElementById('servicioCheckbox').innerText = ' X ';
       }
   
-      if(reclamo.TipoReclamo === 'RECLAMO'){
+      if(reclamo.TipoReclamo == 'RECLAMO'){
         document.getElementById('reclamoCheckbox').innerText = ' X ';
       } else {
         document.getElementById('quejaCheckbox').innerText = ' X ';
