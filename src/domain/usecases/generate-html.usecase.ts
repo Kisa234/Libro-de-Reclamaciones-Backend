@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda';
+import puppeteer from 'puppeteer-core';
 
 import { ReclamacionEntity } from '../entities/reclamacion.entity';
 
@@ -61,8 +62,10 @@ export class generateReclamoHTML implements GenerateReclamoHTMLUseCase {
         const pdfPath = path.join(outputDir, `reclamo_${Date.now()}.pdf`); // Nombre único
 
         const browser = await puppeteer.launch({
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
-          });          
+          args: chromium.args,
+          executablePath: await chromium.executablePath || '/usr/bin/chromium-browser', // fallback
+          headless: chromium.headless,
+        });        
         const page = await browser.newPage();
 
         await page.setContent(html, { waitUntil: 'load' });
