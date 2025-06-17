@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.5.0",
-    "chrome-aws-lambda": "^10.1.0",
+    "chrome-aws-lambda": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "env-var": "^7.5.0",
