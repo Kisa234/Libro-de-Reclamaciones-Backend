@@ -63,7 +63,7 @@ export class generateReclamoHTML implements GenerateReclamoHTMLUseCase {
 
         const browser = await puppeteer.launch({
           args: chromium.args,
-          executablePath: await chromium.executablePath || '/usr/bin/chromium-browser', // fallback
+          executablePath: await chromium.executablePath, // fallback
           headless: chromium.headless,
         });        
         const page = await browser.newPage();
