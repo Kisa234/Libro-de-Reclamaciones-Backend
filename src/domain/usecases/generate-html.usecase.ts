@@ -1,87 +1,57 @@
 import fs from 'fs';
 import path from 'path';
-import chromium from 'chrome-aws-lambda';
-import puppeteer from 'puppeteer-core';
-
+import puppeteer from 'puppeteer';
 import { ReclamacionEntity } from '../entities/reclamacion.entity';
 
 export interface GenerateReclamoHTMLUseCase {
-    execute(reclamacionEntity: ReclamacionEntity): string;
-    generatePDF(html:string) : Promise<string>;
+  execute(reclamacionEntity: ReclamacionEntity): string;
+  generatePDF(html: string): Promise<string>;
 }
-
-
 
 export class generateReclamoHTML implements GenerateReclamoHTMLUseCase {
-    
-    
+  execute(reclamoEntity: ReclamacionEntity): string {
+    const filePath = path.join(__dirname, '../../../index.html');
+    let html = fs.readFileSync(filePath, 'utf8');
 
-    execute(reclamoEntity: ReclamacionEntity): string {
-        const filePath = path.join(__dirname, '../../../index.html');
-        let html = fs.readFileSync(filePath, 'utf8');
-    
-        // Convertir entidad a JSON (formatear fechas como ISO string)
-        const reclamoJSON = JSON.stringify({
-            ...reclamoEntity,
-            FechaReclamo: reclamoEntity.FechaReclamo.toISOString(),
-            FechaRespuesta: reclamoEntity.FechaRespuesta.toISOString()
-        });
-    
-        // Buscar el <script> que contiene la lógica
-        const scriptStartTag = '<script>';
-        const scriptIndex = html.indexOf(scriptStartTag);
-    
-        if (scriptIndex !== -1) {
-            // Insertar <script id="reclamo-data"> justo antes del script principal
-            const jsonScriptTag = `
-                <script id="reclamo-data" type="application/json">
-                ${reclamoJSON}
-                </script>`;
-    
-            html = html.slice(0, scriptIndex) + jsonScriptTag + '\n' + html.slice(scriptIndex);
-        } else {
-            // Si no encuentra el script, opcionalmente puedes insertar al final del body
-            const fallbackScript = `
-                 <script id="reclamo-data" type="application/json">
-                 ${reclamoJSON}
-                 </script>`;
-            html = html.replace('</body>', `${fallbackScript}\n</body>`);
-        }
-    
-        return html;
-    }
-    
+    const reclamoJSON = JSON.stringify({
+      ...reclamoEntity,
+      FechaReclamo: reclamoEntity.FechaReclamo.toISOString(),
+      FechaRespuesta: reclamoEntity.FechaRespuesta.toISOString()
+    });
 
-    async generatePDF(html: string): Promise<string> {
-        const outputDir = path.join(__dirname, '../../../reclamos'); // Carpeta donde se guardará el PDF
-        
-        if (!fs.existsSync(outputDir)) {
-            fs.mkdirSync(outputDir, { recursive: true }); // Crea la carpeta si no existe
-        }
+    const scriptTag = `<script id="reclamo-data" type="application/json">${reclamoJSON}</script>`;
+    const idx = html.indexOf('<script>');
+    html = idx >= 0
+      ? html.slice(0, idx) + scriptTag + '\n' + html.slice(idx)
+      : html.replace('</body>', `${scriptTag}\n</body>`);
 
-        const pdfPath = path.join(outputDir, `reclamo_${Date.now()}.pdf`); // Nombre único
+    return html;
+  }
 
-        const browser = await puppeteer.launch({
-          args: chromium.args,
-          executablePath: await chromium.executablePath, // fallback
-          headless: chromium.headless,
-        });        
-        const page = await browser.newPage();
-
-        await page.setContent(html, { waitUntil: 'load' });
-
-    // Generar y guardar el PDF
-        await page.pdf({
-            path: pdfPath,
-            format: 'A4',
-            printBackground: true
-        });
-
-        await browser.close();
-        return pdfPath; 
+  async generatePDF(html: string): Promise<string> {
+    const outputDir = path.join(__dirname, '../../../reclamos');
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    
-    
+    const pdfPath = path.join(outputDir, `reclamo_${Date.now()}.pdf`);
+
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      headless: true,
+    });
+
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: 'load' });
+
+    await page.pdf({
+      path: pdfPath,
+      format: 'A4',
+      printBackground: true,
+    });
+
+    await browser.close();
+
+    return pdfPath;
+  }
 }
-
