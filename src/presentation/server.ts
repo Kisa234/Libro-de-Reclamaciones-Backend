@@ -22,21 +22,24 @@ export class Server {
 
 
     async start(){
+        // CORS config
+        this.app.use(cors({
+            origin: 'https://piolabrands.com', // permitir solo este dominio
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+            credentials: true
+        }));
+
+        // Middleware para permitir preflight requests
+        this.app.options('*', cors());
 
         // Middlewares
         this.app.use(express.json()); //raw json
         this.app.use(express.urlencoded({extended: true})); // x-www-form-urlencoded
 
-       
-        //CORS
-        this.app.use(cors());
         
         // ROUTES
         this.app.use(this.router);
-
-
-        
-        
 
         this.app.listen(this.port, () => {
             console.log(`Server is running on port ${this.port}`);
